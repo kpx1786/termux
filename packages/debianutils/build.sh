@@ -3,6 +3,7 @@ TERMUX_PKG_DESCRIPTION="Small utilities which are used primarily by the installa
 TERMUX_PKG_LICENSE="GPL-2.0"
 TERMUX_PKG_MAINTAINER="@termux"
 TERMUX_PKG_VERSION="5.21"
+TERMUX_PKG_REVISION=1
 TERMUX_PKG_SRCURL=https://deb.debian.org/debian/pool/main/d/debianutils/debianutils_${TERMUX_PKG_VERSION}.tar.xz
 TERMUX_PKG_SHA256=0053dcfd89e5c7dbfb2632450c00af6b8a646eeaaf185bbc8f2915488f994fe5
 TERMUX_PKG_AUTO_UPDATE=true
