@@ -4,7 +4,7 @@ TERMUX_PKG_LICENSE="Apache-2.0, VIM License"
 TERMUX_PKG_LICENSE_FILE="LICENSE.txt"
 TERMUX_PKG_MAINTAINER="Joshua Kahn @TomJo2000"
 TERMUX_PKG_VERSION="0.10.2"
-TERMUX_PKG_REVISION=2
+TERMUX_PKG_REVISION=3
 TERMUX_PKG_SRCURL=https://github.com/neovim/neovim/archive/v${TERMUX_PKG_VERSION}.tar.gz
 TERMUX_PKG_SHA256=546cb2da9fffbb7e913261344bbf4cf1622721f6c5a67aa77609e976e78b8e89
 TERMUX_PKG_AUTO_UPDATE=true
@@ -82,7 +82,15 @@ termux_step_post_make_install() {
 	cp $TERMUX_PKG_BUILDER_DIR/sysinit.vim $_CONFIG_DIR/
 
 	# Tree-sitter grammars are packaged separately and installed into TERMUX_PREFIX/lib/tree_sitter.
-	ln -s "${TERMUX_PREFIX}"/lib/tree_sitter "${TERMUX_PREFIX}"/share/nvim/runtime/parser
+	ln -sf "${TERMUX_PREFIX}"/lib/tree_sitter "${TERMUX_PREFIX}"/share/nvim/runtime/parser
+
+	mv "${TERMUX_PREFIX}"/bin/nvim "${TERMUX_PREFIX}"/bin/nvim.bin
+	cat <<-EOF > "${TERMUX_PREFIX}"/bin/nvim
+#!/bin/sh
+export LD_PRELOAD="\${LD_PRELOAD}:libluajit.so"
+exec "${TERMUX_PREFIX}"/bin/nvim.bin "\$@"
+EOF
+	chmod u+x "${TERMUX_PREFIX}"/bin/nvim
 }
 
 termux_step_create_debscripts() {
