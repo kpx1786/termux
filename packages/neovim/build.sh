@@ -82,7 +82,7 @@ termux_step_post_make_install() {
 	cp $TERMUX_PKG_BUILDER_DIR/sysinit.vim $_CONFIG_DIR/
 
 	# Tree-sitter grammars are packaged separately and installed into TERMUX_PREFIX/lib/tree_sitter.
-	ln -s "${TERMUX_PREFIX}"/lib/tree_sitter "${TERMUX_PREFIX}"/share/nvim/runtime/parser
+	ln -sf "${TERMUX_PREFIX}"/lib/tree_sitter "${TERMUX_PREFIX}"/share/nvim/runtime/parser
 }
 
 termux_step_create_debscripts() {
