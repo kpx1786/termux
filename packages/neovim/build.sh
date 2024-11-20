@@ -90,7 +90,7 @@ termux_step_post_make_install() {
 export LD_PRELOAD="\${LD_PRELOAD}:libluajit.so"
 exec "${TERMUX_PREFIX}"/bin/nvim.bin "\$@"
 EOF
-	chmod a+x "${TERMUX_PREFIX}"/bin/nvim
+	chmod u+x "${TERMUX_PREFIX}"/bin/nvim
 }
 
 termux_step_create_debscripts() {
